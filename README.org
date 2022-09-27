@@ -1,2 +1,2 @@
 * Overview
-This major mode provides basic syntax highlighting, indentation, and imenu support for the Instrument Connectivity Language (ICL) as defined by the  [[https://standards.ieee.org/ieee/1687/3931/][IEEE 1687]] spec. It also associates ~.pdl~ files with the builtin TCL mode, which is used as the basis for the Procedural Description Language (PDL).
+Adds support for the  [[https://standards.ieee.org/ieee/1687/3931/][IEEE 1687]] spec. Defines a new major mode ~icl-mode~ that provides basic syntax highlighting, indentation, and imenu support for the Instrument Connectivity Language (ICL). Also sets up ~.pdl~ files to better support the Procedural Description Language (PDL) extensions.

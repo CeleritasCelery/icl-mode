@@ -30,6 +30,17 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.pdl\\'" . tcl-mode))
 
+(with-eval-after-load 'tcl-mode
+  (push "iProc" tcl-proc-list)
+  (push "iTopProc" tcl-proc-list)
+  (push "iProc" tcl-keyword-list)
+  (push "iTopProc" tcl-keyword-list)
+  (push "iProcsForModule" tcl-keyword-list)
+  (tcl-set-proc-regexp)
+  (tcl-set-font-lock-keywords)
+  (setq tcl-imenu-generic-expression
+        `((nil ,(concat tcl-proc-regexp "\\([-A-Za-z0-9_:+*]+\\)") 2))))
+
 (defun icl-broken-line-p ()
   "Check if the line is split across a declaration.
 For example:
