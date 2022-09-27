@@ -5,7 +5,7 @@
 ;; https://standards.ieee.org/ieee/1687/3931/
 ;;
 ;; This major mode provides basic syntax highlighting, indentation, and imenu
-;; support for the Instrument Connectivity Lanugage (ICL) as defined by IEEE
+;; support for the Instrument Connectivity Language (ICL) as defined by IEEE
 ;; 1687.
 
 ;;; Code:
