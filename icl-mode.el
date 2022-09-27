@@ -36,6 +36,9 @@
 (defvar tcl-proc-regexp)
 (defvar tcl-imenu-generic-expression)
 (defvar c-basic-offset)
+(declare-function tcl-set-font-lock-keywords "tcl")
+(declare-function tcl-set-proc-regexp "tcl")
+(declare-function c-indent-line "cc-cmds")
 
 (defvar icl-imenu-generic-expression
   `(("modules" ,(rx bol "Module" (+ " ") (group (1+ (any alnum "_-"))) symbol-end) 1)
