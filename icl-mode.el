@@ -1,3 +1,4 @@
+;;; icl-mode.el --- Support for IEEE 1687 ICL/PDL
 ;;; -*- lexical-binding: t; -*-
 
 ;;; Commentary:
