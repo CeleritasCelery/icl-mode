@@ -1,19 +1,48 @@
-;;; icl-mode.el --- Support for IEEE 1687 ICL/PDL
-;;; -*- lexical-binding: t; -*-
+;;; icl-mode.el --- Support for IEEE 1687 ICL/PDL  -*- lexical-binding: t; -*-
+
+;; Author: Troy Hinckley <troy.hinckley@dabrev.com>
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "25.2"))
+;; Homepage: https://github.com/CeleritasCelery/icl-mode
+
+;; This file is free software; you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published
+;; by the Free Software Foundation; either version 3, or (at your
+;; option) any later version.
+;;
+;; This file is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+;;
+;; For a full copy of the GNU General Public License
+;; see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
-;; Major mode for IEEE 1687-2014 ICL
-;; https://standards.ieee.org/ieee/1687/3931/
+
+;; This package adds support for the formats in the IEEE 1687-2014 spec. It
+;; provides the icl-mode major mode that includes basic syntax highlighting,
+;; indentation, and imenu support for the Instrument Connectivity Language
+;; (ICL). Also sets up pdl files to better support the Procedural Description
+;; Language (PDL) extensions.
 ;;
-;; This major mode provides basic syntax highlighting, indentation, and imenu
-;; support for the Instrument Connectivity Language (ICL) as defined by IEEE
-;; 1687.
+;; For more info, see the IEEE spec:
+;; https://standards.ieee.org/ieee/1687/3931/
 
 ;;; Code:
 
+(eval-when-compile
+  (require 'cc-mode))
+
+(defvar tcl-proc-list)
+(defvar tcl-keyword-list)
+(defvar tcl-proc-regexp)
+(defvar tcl-imenu-generic-expression)
+(defvar c-basic-offset)
+
 ;;;###autoload
 (define-derived-mode icl-mode c-mode "ICL"
-  "Major mode for IEEE 1687 ICL"
+  "Major mode for IEEE 1687 ICL."
   (setq-local c-basic-offset 3)
   (setq-local indent-line-function 'icl-indent-line)
   (setq-local font-lock-defaults '(icl-font-lock-keywords))
@@ -28,10 +57,12 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.icl\\'" . icl-mode))
 
-;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.pdl\\'" . tcl-mode))
 
-(with-eval-after-load 'tcl-mode
+;;;###autoload
+(defun icl-add-pdl-keywords ()
+  "Add PDL keywords to `tcl-mode'."
+  (require 'tcl)
   (push "iProc" tcl-proc-list)
   (push "iTopProc" tcl-proc-list)
   (push "iProc" tcl-keyword-list)
@@ -49,7 +80,7 @@ For example:
 Instance x Of
     y {}"
   (save-excursion
-    (previous-line)
+    (forward-line -1)
     (end-of-line)
     (skip-syntax-backward " " (line-beginning-position))
     (save-match-data
@@ -58,7 +89,7 @@ Instance x Of
 (defun icl-indent-line ()
   "Indent like C, unless we have a split declaration."
   (interactive)
-  (let ((c-basic-offset (if (icl-broken-line-p) (+1 c-basic-offset) c-basic-offset)))
+  (let ((c-basic-offset (if (icl-broken-line-p) (1+ c-basic-offset) c-basic-offset)))
     (c-indent-line)))
 
 (defvar icl-font-lock-keywords

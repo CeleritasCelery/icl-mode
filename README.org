@@ -1,2 +1,8 @@
 * Overview
-Adds support for the  [[https://standards.ieee.org/ieee/1687/3931/][IEEE 1687]] spec. Defines a new major mode ~icl-mode~ that provides basic syntax highlighting, indentation, and imenu support for the Instrument Connectivity Language (ICL). Also sets up ~.pdl~ files to better support the Procedural Description Language (PDL) extensions.
+This package adds support for the formats in the [[https://standards.ieee.org/ieee/1687/3931/][IEEE 1687]] spec. It provides a new major mode ~icl-mode~ that includes basic syntax highlighting, indentation, and imenu support for the Instrument Connectivity Language (ICL). Also sets up ~.pdl~ files to better support the Procedural Description Language (PDL) extensions.
+** PDL keywords
+To add a subset of the PDL keywords to ~tcl-mode~ call the ~icl-add-pdl-keywords~ function:
+#+begin_src emacs-lisp
+  (with-eval-after-load 'tcl
+    (icl-add-pdl-keywords))
+#+end_src
