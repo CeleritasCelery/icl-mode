@@ -114,7 +114,7 @@ Instance x Of
 (define-derived-mode icl-mode c-mode "ICL"
   "Major mode for IEEE 1687 ICL."
   (setq-local c-basic-offset 3)
-  (setq-local indent-line-function 'icl-indent-line)
+  (setq-local indent-line-function #'icl-indent-line)
   (setq-local font-lock-defaults '(icl-font-lock-keywords))
   (setq-local comment-start "//")
   (setq-local comment-end "")
