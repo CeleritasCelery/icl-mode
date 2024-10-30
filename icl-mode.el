@@ -119,7 +119,7 @@ Instance x Of
         `((nil ,(concat tcl-proc-regexp "\\([-A-Za-z0-9_:+*]+\\)") 2))))
 
 ;;;###autoload
-(define-derived-mode icl-mode c-mode "ICL"
+(define-derived-mode icl-mode java-mode "ICL"
   "Major mode for IEEE 1687 ICL."
   (setq-local c-basic-offset 3)
   (setq-local indent-line-function #'icl-indent-line)
