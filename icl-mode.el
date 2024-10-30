@@ -73,6 +73,7 @@
 ;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.icl\\'" . icl-mode))
 
+;;;###autoload
 (add-to-list 'auto-mode-alist '("\\.pdl\\'" . tcl-mode))
 
 (defun icl-broken-line-p ()
@@ -105,6 +106,13 @@ Instance x Of
   (push "iProc" tcl-keyword-list)
   (push "iTopProc" tcl-keyword-list)
   (push "iProcsForModule" tcl-keyword-list)
+  (push "iUseProcNameSpace" tcl-keyword-list)
+  (setq tcl-builtin-list
+        (append tcl-builtin-list
+                '("iPDLLevel" "iPrefix" "iReset" "iWrite" "iRead"
+                  "iScan" "iOverrideScanInterface" "iApply" "iClock"
+                  "iClockOverride" "iRunLoop" "iCall" "iNote" "iMerge"
+                  "iTake" "iRelease" "iState")))
   (tcl-set-proc-regexp)
   (tcl-set-font-lock-keywords)
   (setq tcl-imenu-generic-expression
